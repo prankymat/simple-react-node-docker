@@ -4,7 +4,7 @@ COPY . /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN npm install
+RUN npm install --production
 RUN npm run build
 
 RUN npm install -g serve

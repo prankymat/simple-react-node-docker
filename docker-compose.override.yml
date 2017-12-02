@@ -1,5 +1,17 @@
 version: "3"
 services:
+  server:
+    image: "node:9.2"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./server:/home/node/app
+    ports:
+      - 3000:3000
+    command: "npm start"
+
   frontend:
     image: "node:9.2"
     user: "node"
@@ -8,8 +20,6 @@ services:
       - NODE_ENV=development
     volumes:
       - ./app:/home/node/app
-    expose:
-      - 3000
     ports:
       - 8080:3000
     command: "npm start"

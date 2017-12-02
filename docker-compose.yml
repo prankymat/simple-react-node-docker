@@ -2,10 +2,15 @@ version: "3"
 services:
   frontend:
     build: ./app
-    expose:
-      - 8000
     ports:
-      - 8000:8000
+      - 80:3000
+    depends_on:
+      - server
+
+  server:
+    build: ./server
+    ports:
+      - 3000:3000
     depends_on:
       - db
 
