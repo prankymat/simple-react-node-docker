@@ -1,0 +1,15 @@
+version: "2"
+services:
+  node:
+    image: "node:9.2"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./app:/home/node/app
+    expose:
+      - "3000"
+    ports:
+      - 8080:3000
+    command: "npm start"
