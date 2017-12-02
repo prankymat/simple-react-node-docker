@@ -1,20 +1,13 @@
 version: "3"
 services:
-  node:
-    image: "node:9.2"
-    user: "node"
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - ./app:/home/node/app
+  frontend:
+    build: ./app
     expose:
-      - "3000"
+      - 8000
     ports:
-      - 8080:3000
+      - 8000:8000
     depends_on:
       - db
-    command: "npm start"
 
   db:
     image: "mongo:3.0"
