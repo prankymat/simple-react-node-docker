@@ -1,12 +1,9 @@
-FROM node:9.2
+FROM node:latest
 RUN mkdir -p /usr/src/app
 COPY . /usr/src/app
 
 WORKDIR /usr/src/app
 
-RUN npm install --production
-RUN npm run build
+RUN npm install && npm install -g serve && npm run build
 
-RUN npm install -g serve
-
-CMD ["serve", "-p", "8000", "-s", "build"]
+CMD ["serve", "-p", "3000", "-s", "build"]

@@ -2,15 +2,30 @@ version: "3"
 services:
   frontend:
     build: ./app
-    ports:
-      - 80:3000
+    expose:
+      - 3000
+    volumes:
+      - app:/usr/src/app
     depends_on:
       - server
 
+  nginx:
+    build: ./nginx
+    depends_on:
+      - frontend
+    volumes:
+      - app:/usr/src/app
+    links:
+      - frontend
+    ports:
+      - "80:80"
+
   server:
     build: ./server
-    ports:
-      - 3000:3000
+    # ports:
+    #   - 3000:3000
+    expose:
+      - 3000
     depends_on:
       - db
 
@@ -26,3 +41,6 @@ services:
     ports:
       - 27017
     command: mongod --smallfiles --logpath=/var/log/db.log
+
+volumes:
+  app:
