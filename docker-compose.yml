@@ -5,7 +5,7 @@ services:
     expose:
       - 3000
     volumes:
-      - app:/usr/src/app
+      - app_build:/usr/src/app/build
     depends_on:
       - server
 
@@ -14,7 +14,7 @@ services:
     depends_on:
       - frontend
     volumes:
-      - app:/usr/src/app
+      - app_build:/www
     links:
       - frontend
     ports:
@@ -22,8 +22,6 @@ services:
 
   server:
     build: ./server
-    # ports:
-    #   - 3000:3000
     expose:
       - 3000
     depends_on:
@@ -43,4 +41,4 @@ services:
     command: mongod --smallfiles --logpath=/var/log/db.log
 
 volumes:
-  app:
+  app_build:
